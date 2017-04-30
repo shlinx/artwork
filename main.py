@@ -1,10 +1,12 @@
 import time
+import os
 from gpiozero import MotionSensor
 from signal import pause
 
 class artwork():
 
     def __init__(self, sensor_pin=4, led_pin=17):
+        self.work_path = os.path.dirname(os.path.abspath(__file__))
         self.pir = MotionSensor(sensor_pin)
         self.count = int(time.time())
         self.pir.when_motion = self.on_when_motion
@@ -27,7 +29,7 @@ class artwork():
         print('\n')
 
     def play_sound(self):
-        os.system('mpg123 -q audio.mp3')
+        os.system('mpg123 -q {file}'.format(file=self.work_path + '/audio.mp3'))
 
     def control_led(self, on=True):
         if on:
