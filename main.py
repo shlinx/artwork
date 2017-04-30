@@ -11,6 +11,7 @@ class artwork():
         self.count = int(time.time())
         self.pir.when_motion = self.on_when_motion
         self.pir.when_no_motion = self.on_when_no_motion
+        print('Artwork is watching motions...')
         pause()
 
     def on_when_motion(self):
