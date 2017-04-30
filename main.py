@@ -27,7 +27,7 @@ class artwork():
         print('\n')
 
     def play_sound(self):
-        print('Play sound here.')
+        os.system('mpg123 -q audio.mp3')
 
     def control_led(self, on=True):
         if on:
