@@ -21,6 +21,7 @@ class artwork():
         print('Motion detected!')
         self.control_led()
         self.play_sound()
+        self.control_led(on=False)
         print('\n')
     
     def on_when_no_motion(self):
