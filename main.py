@@ -45,8 +45,10 @@ class Artwork:
         self.control_led()
         self.play_sound()
         self.control_led(on=False)
+        print("Sleeping for 60 seconds")
         print('\n')
-    
+        time.sleep(60)
+
     def on_when_no_motion(self):
         new_time = int(time.time())
         gap = new_time - self.count
@@ -55,13 +57,23 @@ class Artwork:
         print('\n')
 
     def play_sound(self):
-        os.system('mpg123 -q "{}"'.format(self.get_audio_file()))
-        time.sleep(60)
+        current = os.path.join(self.work_path, 'audios', AUDIOS[self.audio_file_index])
+        print("Playing {}".format(AUDIOS[self.audio_file_index]))
+        os.system('mpg123 -q "{}"'.format(current))
+        print("Finish Playing {}.".format(AUDIOS[self.audio_file_index]))
+        print('\n')
+        self.audio_file_index += 1
+        try:
+            AUDIOS[self.audio_file_index]
+        except IndexError:
+            self.audio_file_index = 0
 
     def control_led(self, on=True):
         if on:
+            print("Turning on LED...")
             self.led.on()
         else:
+            print("Turning off LED...")
             self.led.off()
 
 Artwork()
