@@ -1,14 +1,19 @@
 import time
-import os
+import os, sys
 from gpiozero import MotionSensor
 from gpiozero import LED
 from signal import pause
 
+AUDIOS = [
+    'Waves & seagull.mp3'
+]
+
+sys.path.append(os.getcwd())
+
 try:
-    from .settings import *
+    from settings import *
 except ImportError:
     pass
-
 
 class Artwork:
     work_path = os.path.dirname(os.path.abspath(__file__))
