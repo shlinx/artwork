@@ -1,0 +1,9 @@
+[Unit]
+Description=Hamish's artwork
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/pi/artwork/main.py &
+
+[Install]
+WantedBy=multi-user.target
