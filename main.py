@@ -4,7 +4,8 @@ from gpiozero import MotionSensor
 from gpiozero import LED
 from signal import pause
 
-class artwork():
+
+class Artwork:
 
     def __init__(self, sensor_pin=4, led_pin=17):
         self.work_path = os.path.dirname(os.path.abspath(__file__))
