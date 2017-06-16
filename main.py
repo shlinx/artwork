@@ -1,5 +1,6 @@
 import time
-import os, sys
+import os
+import sys
 from gpiozero import MotionSensor
 from gpiozero import LED
 from signal import pause
@@ -14,6 +15,7 @@ try:
     from settings import *
 except ImportError:
     pass
+
 
 class Artwork:
     work_path = os.path.dirname(os.path.abspath(__file__))
