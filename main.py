@@ -33,6 +33,10 @@ class Artwork:
     def get_audio_file(self):
         current = os.path.join(self.work_path, 'audios', AUDIOS[self.audio_file_index])
         self.audio_file_index += 1
+        try:
+            AUDIOS[self.audio_file_index]
+        except IndexError:
+            self.audio_file_index = 0
         return current
 
     def on_when_motion(self):
@@ -51,7 +55,7 @@ class Artwork:
         print('\n')
 
     def play_sound(self):
-        os.system('mpg123 -q {}'.format(self.get_audio_file()))
+        os.system('mpg123 -q "{}"'.format(self.get_audio_file()))
         time.sleep(60)
 
     def control_led(self, on=True):
