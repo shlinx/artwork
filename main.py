@@ -54,6 +54,7 @@ class Artwork:
         self.play_sound()
         self.control_led(on=False)
         print("Sleeping for a while.")
+        time.sleep(60)
 
     def on_when_no_motion(self):
         new_time = int(time.time())
