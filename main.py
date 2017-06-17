@@ -54,7 +54,6 @@ class Artwork:
         self.play_sound()
         self.control_led(on=False)
         print("Sleeping for a while.")
-        time.sleep(60)
 
     def on_when_no_motion(self):
         new_time = int(time.time())
@@ -78,11 +77,13 @@ class Artwork:
         if on:
             print("Turning on LED for pins {}".format(led_pins))
             for pin in led_pins:
-                self.led_pins[pin].on()
+                pin_obj = self.led_pins[pin]
+                pin_obj.on()
         else:
             print("Turning off LED for pins {}".format(led_pins))
             for pin in led_pins:
-                self.led_pins[pin].on()
+                pin_obj = self.led_pins[pin]
+                pin_obj.off()
             self.led_color_index += 1
             try:
                 LED_COLORS[self.led_color_index]
