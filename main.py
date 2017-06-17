@@ -36,14 +36,14 @@ class Artwork:
 
     def __init__(self, sensor_pin=4):
         self.pir = MotionSensor(sensor_pin)
-        self.led_pins = []
+        self.led_pins = {}
         self.count = int(time.time())
         self.pir.when_motion = self.on_when_motion
         self.pir.when_no_motion = self.on_when_no_motion
         self.audio_file_index = 0
         self.led_color_index = 0
         for pin in LED_PINS:
-            self.led_pins.append(LED(pin))
+            self.led_pins[pin] = LED(pin)
         print('Artwork is watching motions...')
         pause()
 
@@ -53,7 +53,7 @@ class Artwork:
         self.control_led()
         self.play_sound()
         self.control_led(on=False)
-        print("Sleeping for 60 seconds")
+        print("Sleeping for a while.")
         time.sleep(60)
 
     def on_when_no_motion(self):
@@ -74,18 +74,18 @@ class Artwork:
             self.audio_file_index = 0
 
     def control_led(self, on=True):
-        led_pins = self.led_pins[self.led_color_index]
+        led_pins = LED_COLORS[self.led_color_index]
         if on:
             print("Turning on LED for pins {}".format(led_pins))
             for pin in led_pins:
-                pin.on()
+                self.led_pins[pin].on()
         else:
             print("Turning off LED for pins {}".format(led_pins))
             for pin in led_pins:
-                pin.off()
+                self.led_pins[pin].on()
             self.led_color_index += 1
             try:
-                self.led_pins[self.led_color_index]
+                LED_COLORS[self.led_color_index]
             except IndexError:
                 self.led_color_index = 0
 
